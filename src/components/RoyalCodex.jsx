@@ -77,9 +77,9 @@ export default function RoyalCodex() {
                 boxShadow: isActive ? '0 0 16px rgba(255,215,0,0.35), inset 0 0 16px rgba(255,215,0,0.1)' : 'none'
               }}
             >
-              {config?.thumbnail_url && (
+              {config?.portrait_url && (
                 <img
-                  src={config.thumbnail_url}
+                  src={config.portrait_url}
                   alt={config?.name}
                   style={{
                     width: '100%',

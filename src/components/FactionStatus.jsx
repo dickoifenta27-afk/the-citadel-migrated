@@ -22,21 +22,21 @@ export default function FactionStatus() {
               <div>
                 <div className="flex justify-between mb-1">
                   <span className="text-sm" style={{ color: 'var(--color-text-accent)' }}>Loyalty</span>
-                  <span className="font-semibold text-sm" style={{ color: 'var(--color-text-primary)' }}>{(faction.loyalty * 100).toFixed(1)}%</span>
+                  <span className="font-semibold text-sm" style={{ color: 'var(--color-text-primary)' }}>{faction.loyalty}%</span>
                 </div>
                 <div className="w-full rounded-full h-2" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-default)' }}>
                   <div className="h-2 rounded-full transition-all"
-                    style={{ width: `${faction.loyalty * 100}%`, background: 'linear-gradient(to right, var(--color-gold-dark), var(--color-gold-primary))' }} />
+                    style={{ width: `${faction.loyalty}%`, background: 'linear-gradient(to right, var(--color-gold-dark), var(--color-gold-primary))' }} />
                 </div>
               </div>
               <div>
                 <div className="flex justify-between mb-1">
                   <span className="text-sm" style={{ color: 'var(--color-text-accent)' }}>Influence</span>
-                  <span className="font-semibold text-sm" style={{ color: 'var(--color-text-primary)' }}>{(faction.influence * 100).toFixed(1)}%</span>
+                  <span className="font-semibold text-sm" style={{ color: 'var(--color-text-primary)' }}>{faction.influence}%</span>
                 </div>
                 <div className="w-full rounded-full h-2" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-default)' }}>
                   <div className="h-2 rounded-full transition-all"
-                    style={{ width: `${faction.influence * 100}%`, background: 'linear-gradient(to right, #8B6914, #C9A84C)' }} />
+                    style={{ width: `${faction.influence}%`, background: 'linear-gradient(to right, #8B6914, #C9A84C)' }} />
                 </div>
               </div>
             </div>

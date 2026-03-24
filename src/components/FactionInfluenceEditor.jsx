@@ -140,7 +140,7 @@ export default function FactionInfluenceEditor() {
                       )}
                     </div>
                     <div className="text-xs opacity-70 mt-1">
-                      Influence: {(faction.influence * 100).toFixed(0)}%
+                      Influence: {faction.influence}%
                     </div>
                   </button>
                 );

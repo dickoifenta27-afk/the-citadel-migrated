@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { supabase } from '@/lib/supabase-client.js';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Loader2, Sword, Clock } from 'lucide-react';
 
 const ICONS = {
@@ -105,6 +105,7 @@ function EmberParticles() {
 
 export default function MainMenu() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
   const [selectedScenario, setSelectedScenario] = useState(null);
 
@@ -143,6 +144,9 @@ export default function MainMenu() {
       const { data: { user } } = await supabase.auth.getUser();
       await base44.entities.UserState.create({ ...state, user_id: user.id });
     }
+
+    // Invalidate userState query cache so Layout.jsx fetches fresh data
+    queryClient.invalidateQueries({ queryKey: ['userState'] });
 
     // Clear TurnHistory and ActiveEvents for fresh start
     try {

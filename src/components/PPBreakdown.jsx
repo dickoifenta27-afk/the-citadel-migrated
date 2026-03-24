@@ -22,7 +22,7 @@ export default function PPBreakdown({ gameState }) {
   for (const councilMember of councilMembers) {
     const faction = factions.find(f => f.faction_name === councilMember.faction_name);
     if (faction && councilMember.seat_count > 0) {
-      const contribution = (faction.loyalty - 0.5) * councilMember.seat_count;
+      const contribution = ((faction.loyalty - 50) / 100) * councilMember.seat_count;
       totalFromFactions += contribution;
       breakdown.push({
         faction: faction.faction_name,
@@ -60,7 +60,7 @@ export default function PPBreakdown({ gameState }) {
                   <div className="flex-1">
                     <p className="text-[#e0e0e0] font-semibold text-sm">{item.faction}</p>
                     <p className="text-[#cd7f32] text-xs">
-                      Loyalty: {(item.loyalty * 100).toFixed(0)}% • Seats: {item.seats}
+                      Loyalty: {item.loyalty}% • Seats: {item.seats}
                     </p>
                   </div>
                   <span className={`font-bold ${item.contribution > 0 ? 'text-green-400' : item.contribution < 0 ? 'text-red-400' : 'text-gray-400'}`}>

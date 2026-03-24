@@ -50,7 +50,7 @@ export default function TurnSummary({ gameState, onProjectionsCalculated }) {
     for (const councilMember of councilMembers) {
       const faction = factions.find(f => f.faction_name === councilMember.faction_name);
       if (faction && councilMember.seat_count > 0) {
-        const contribution = (faction.loyalty - 0.5) * councilMember.seat_count;
+        const contribution = ((faction.loyalty - 50) / 100) * councilMember.seat_count;
         ppFromFactions += contribution;
         ppBreakdown.push({
           faction: faction.faction_name,
@@ -178,7 +178,7 @@ export default function TurnSummary({ gameState, onProjectionsCalculated }) {
                 <div className="flex-1">
                   <p className="text-xs font-semibold" style={{ color: 'var(--color-text-primary)' }}>{item.faction}</p>
                   <p className="text-[10px] opacity-70" style={{ color: 'var(--color-text-accent)' }}>
-                    {(item.loyalty * 100).toFixed(0)}% • {item.seats} seats
+                    {item.loyalty}% • {item.seats} seats
                   </p>
                 </div>
                 <span className="text-xs font-bold" style={{ color: item.contribution > 0 ? 'var(--color-success)' : item.contribution < 0 ? 'var(--color-danger)' : 'var(--color-text-muted)' }}>

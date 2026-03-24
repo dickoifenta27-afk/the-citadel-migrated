@@ -19,9 +19,9 @@ import Infrastructure from './pages/Infrastructure';
 
 // Protected Route Component
 const ProtectedRoute = ({ children, requireDeveloper = false }) => {
-  const { isAuthenticated, isDeveloper, isLoadingAuth, isLoadingPublicSettings } = useAuth();
+  const { isAuthenticated, isDeveloper, isLoading } = useAuth();
   
-  if (isLoadingPublicSettings || isLoadingAuth) {
+  if (isLoading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center" style={{ background: '#0a0a0f' }}>
         <div className="text-center">
@@ -46,10 +46,10 @@ const ProtectedRoute = ({ children, requireDeveloper = false }) => {
 };
 
 const AuthenticatedApp = () => {
-  const { isAuthenticated, isLoadingAuth, isLoadingPublicSettings } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
 
   // Show loading spinner while checking auth
-  if (isLoadingPublicSettings || isLoadingAuth) {
+  if (isLoading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center" style={{ background: '#0a0a0f' }}>
         <div className="text-center">
