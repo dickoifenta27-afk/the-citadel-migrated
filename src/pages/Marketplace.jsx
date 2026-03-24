@@ -123,7 +123,9 @@ export default function Marketplace() {
     queryFn: async () => {
       if (!gameState) return [];
       const allRates = await base44.entities.MarketRates.list();
-      return allRates.sort((a, b) => a.turn_number - b.turn_number).slice(-8);
+      // Only show rates from turn 1 to current turn (not from previous games)
+      const currentGameRates = allRates.filter(r => r.turn_number <= gameState.turn_count);
+      return currentGameRates.sort((a, b) => a.turn_number - b.turn_number).slice(-8);
     },
     enabled: !!gameState
   });

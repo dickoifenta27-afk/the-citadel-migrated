@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/api/supabaseClient';
 
 const AuthContext = createContext(null);
@@ -116,16 +116,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const isDeveloper = () => {
-    return profile?.role === 'developer';
-  };
+  // Compute isDeveloper based on profile role or hardcoded email
+  const isDeveloper = useMemo(() => {
+    const isDevEmail = user?.email === 'dickoifenta27@gmail.com';
+    const isDevRole = profile?.role === 'developer';
+    console.log('AuthContext - isDeveloper check:', { email: user?.email, role: profile?.role, isDevEmail, isDevRole });
+    return isDevRole || isDevEmail;
+  }, [user, profile]);
 
   const value = {
     user,
     profile,
     isLoading,
     isAuthenticated,
-    isDeveloper: isDeveloper(),
+    isDeveloper,
     signIn,
     signUp,
     signOut

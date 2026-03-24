@@ -148,7 +148,7 @@ export default function MainMenu() {
     // Invalidate userState query cache so Layout.jsx fetches fresh data
     queryClient.invalidateQueries({ queryKey: ['userState'] });
 
-    // Clear TurnHistory and ActiveEvents for fresh start
+    // Clear TurnHistory, ActiveEvents, and MarketRates for fresh start
     try {
       const turnHistories = await base44.entities.TurnHistory.list();
       for (const th of turnHistories) {
@@ -157,6 +157,11 @@ export default function MainMenu() {
       const activeEvents = await base44.entities.ActiveEvent.list();
       for (const ae of activeEvents) {
         await base44.entities.ActiveEvent.delete(ae.id);
+      }
+      // Clear market rates history
+      const marketRates = await base44.entities.MarketRates.list();
+      for (const mr of marketRates) {
+        await base44.entities.MarketRates.delete(mr.id);
       }
     } catch (err) {
       // Ignore if entities don't exist
