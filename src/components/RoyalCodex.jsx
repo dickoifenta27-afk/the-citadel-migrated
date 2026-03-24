@@ -20,11 +20,6 @@ export default function RoyalCodex() {
     staleTime: Infinity
   });
 
-  // Debug logging
-  console.log('advisorConfigs:', advisorConfigs);
-  console.log('advisorConfig map:', advisorConfig);
-  console.log('ADVISOR_KEYS:', ADVISOR_KEYS);
-
   const { data: guides = [] } = useQuery({
     queryKey: ['advisoryGuides'],
     queryFn: async () => await base44.entities.AdvisoryGuide.list(),
@@ -38,6 +33,11 @@ export default function RoyalCodex() {
     });
     return map;
   }, [advisorConfigs]);
+
+  // Debug logging (after declarations)
+  console.log('advisorConfigs:', advisorConfigs);
+  console.log('advisorConfig map:', advisorConfig);
+  console.log('ADVISOR_KEYS:', ADVISOR_KEYS);
 
   const topicsByAdvisor = useMemo(() => {
     const map = {};
