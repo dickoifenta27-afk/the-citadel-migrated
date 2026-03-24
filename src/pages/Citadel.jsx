@@ -15,6 +15,11 @@ import RoyalCodex from '@/components/RoyalCodex';
 
 export default function Citadel() {
   const { gameState, refetch, onProjectionsUpdate } = useOutletContext();
+  
+  // Debug logging
+  console.log('Citadel - gameState:', gameState);
+  console.log('Citadel - gameState type:', typeof gameState);
+  
   const [localProjections, setLocalProjections] = useState({});
   const [activeEvent, setActiveEvent] = useState(null);
   const [activeCouncilRequest, setActiveCouncilRequest] = useState(null);
@@ -73,16 +78,18 @@ export default function Citadel() {
   // Frontend only displays events that backend indicates have been triggered
 
   if (!gameState) {
-    return <div className="text-[#e0e0e0]">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-full" style={{ background: 'rgba(10,8,5,0.9)' }}>
+        <div className="text-[#C9A84C] text-xl">Loading game state...</div>
+      </div>
+    );
   }
 
   return (
     <div style={{
-      backgroundImage: "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.60)), url('https://media.base44.com/images/public/69bbb7616d6a3bbc5a56a8f8/0401a2039_generated_image.png')",
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundAttachment: 'fixed',
-      minHeight: '100vh'
+      background: 'linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.60))',
+      minHeight: '100vh',
+      padding: '20px'
     }}>
       <div className="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">

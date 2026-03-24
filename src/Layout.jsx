@@ -28,11 +28,13 @@ export default function Layout() {
     turn_count: 1,
   };
 
-  const { data: gameState, refetch } = useQuery({
+  const { data: gameState, refetch, isLoading, error } = useQuery({
     queryKey: ['userState'],
     queryFn: async () => {
       try {
+        console.log('Layout - fetching userState...');
         const states = await base44.entities.UserState.list();
+        console.log('Layout - userState fetched:', states);
         return states[0] || DEFAULT_GAME_STATE;
       } catch (err) {
         console.warn('Failed to fetch user state, using default:', err);
@@ -43,6 +45,10 @@ export default function Layout() {
     refetchOnWindowFocus: false,
     retry: false,
   });
+  
+  console.log('Layout - gameState:', gameState);
+  console.log('Layout - isLoading:', isLoading);
+  console.log('Layout - error:', error);
 
   const [projections, setProjections] = React.useState({});
 
@@ -52,6 +58,15 @@ export default function Layout() {
       navigate('/Citadel', { replace: true });
     }
   }, [gameState, location.pathname, navigate]);
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center" style={{ background: '#0a0805' }}>
+        <div className="text-[#C9A84C] text-xl">Loading game...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen relative overflow-hidden vignette" style={{
