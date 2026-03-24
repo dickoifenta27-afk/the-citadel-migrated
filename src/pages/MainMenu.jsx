@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
+import { supabase } from '@/lib/supabase-client.js';
 import { useQuery } from '@tanstack/react-query';
 import { Loader2, Sword, Clock } from 'lucide-react';
 
@@ -138,7 +139,9 @@ export default function MainMenu() {
     if (userState) {
       await base44.entities.UserState.update(userState.id, state);
     } else {
-      await base44.entities.UserState.create(state);
+      // Get current user and add user_id for RLS policy
+      const { data: { user } } = await supabase.auth.getUser();
+      await base44.entities.UserState.create({ ...state, user_id: user.id });
     }
 
     // Clear TurnHistory and ActiveEvents for fresh start
