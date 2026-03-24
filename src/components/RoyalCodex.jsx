@@ -37,8 +37,15 @@ export default function RoyalCodex() {
   const advisorConfig = useMemo(() => {
     const map = {};
     advisorConfigs.forEach(cfg => {
-      map[cfg.advisor_id] = cfg;
+      // Try different possible key names
+      const key = cfg.advisor_id || cfg.id || cfg.name?.toLowerCase().replace(/\s+/g, '_');
+      if (key) {
+        map[key] = cfg;
+        // Also add lowercase version for case-insensitive lookup
+        map[key.toLowerCase()] = cfg;
+      }
     });
+    console.log('Built advisorConfig map:', map);
     return map;
   }, [advisorConfigs]);
 
@@ -46,6 +53,12 @@ export default function RoyalCodex() {
   console.log('advisorConfigs:', advisorConfigs);
   console.log('advisorConfig map:', advisorConfig);
   console.log('ADVISOR_KEYS:', ADVISOR_KEYS);
+  
+  // Check structure of first advisor
+  if (advisorConfigs.length > 0) {
+    console.log('First advisor structure:', advisorConfigs[0]);
+    console.log('First advisor keys:', Object.keys(advisorConfigs[0]));
+  }
   
   // Check each advisor
   ADVISOR_KEYS.forEach(key => {
@@ -98,7 +111,9 @@ export default function RoyalCodex() {
       {/* Advisor Cards Row */}
       <div className="grid grid-cols-4 gap-4 mb-8">
         {ADVISOR_KEYS.map((key) => {
-          const config = advisorConfig[key];
+          // Try both exact match and lowercase match
+          const config = advisorConfig[key] || advisorConfig[key.toLowerCase()];
+          console.log(`Rendering advisor ${key}, config:`, config);
           const isActive = selectedAdvisor === key;
           return (
             <button
