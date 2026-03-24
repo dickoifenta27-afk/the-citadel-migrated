@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "name": "the-citadel-crown-counsel",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "env": {
+    "VITE_SUPABASE_URL": "https://kdclnuztnvdawjcbefub.supabase.co",
+    "VITE_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtkY2xudXp0bnZkYXdqY2JlZnViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxNjg5NTgsImV4cCI6MjA4OTc0NDk1OH0.BlhgeI6ipt_nRbH2HM0JTvkn2vossDmZEPySFGyduBM"
+  }
+}
