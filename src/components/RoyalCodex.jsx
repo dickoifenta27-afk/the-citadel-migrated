@@ -81,6 +81,8 @@ export default function RoyalCodex() {
                 <img
                   src={config.portrait_url}
                   alt={config?.name}
+                  loading="lazy"
+                  decoding="async"
                   style={{
                     width: '100%',
                     height: '100%',

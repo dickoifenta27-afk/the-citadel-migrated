@@ -92,7 +92,8 @@ export default function ResourceBar({ gameState, projections }) {
     };
 
     const population = gameState.population || 0;
-    const prosperity = gameState.prosperity || 0.5;
+    // Convert prosperity from INTEGER (0-100) to DECIMAL (0-1)
+    const prosperity = (gameState.prosperity || 50) / 100;
 
     // Gold calculation
     const baseTaxRate = 0.5;
@@ -206,7 +207,8 @@ export default function ResourceBar({ gameState, projections }) {
   const mergedProjections = { ...calculatedProjections, ...projections };
 
   const baseTaxRate = 0.5;
-  const prosperity = gameState?.prosperity || 0.5;
+  // Convert prosperity from INTEGER (0-100) to DECIMAL (0-1)
+  const prosperity = (gameState?.prosperity || 50) / 100;
   const prosperityBonus = prosperity * 0.5;
   const effectiveTaxRate = baseTaxRate + prosperityBonus;
   const rawGoldIncome = Math.floor((gameState?.population || 0) * effectiveTaxRate);
