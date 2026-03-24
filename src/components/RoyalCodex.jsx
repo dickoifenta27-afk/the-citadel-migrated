@@ -13,9 +13,17 @@ export default function RoyalCodex() {
     queryKey: ['advisoryConfigs'],
     queryFn: async () => {
       console.log('Fetching advisors...');
-      const result = await base44.entities.AdvisoryConfigs.list();
-      console.log('Advisors fetched:', result);
-      return result;
+      try {
+        const result = await base44.entities.AdvisoryConfigs.list();
+        console.log('Advisors fetched:', result);
+        if (!result || result.length === 0) {
+          console.warn('No advisors returned from API');
+        }
+        return result;
+      } catch (err) {
+        console.error('Error fetching advisors:', err);
+        throw err;
+      }
     },
     staleTime: Infinity
   });
@@ -38,6 +46,17 @@ export default function RoyalCodex() {
   console.log('advisorConfigs:', advisorConfigs);
   console.log('advisorConfig map:', advisorConfig);
   console.log('ADVISOR_KEYS:', ADVISOR_KEYS);
+  
+  // Check each advisor
+  ADVISOR_KEYS.forEach(key => {
+    const cfg = advisorConfig[key];
+    console.log(`Advisor ${key}:`, cfg);
+    console.log(`  portrait_url:`, cfg?.portrait_url);
+    console.log(`  advisor_id:`, cfg?.advisor_id);
+  });
+  
+  // Check all keys in advisorConfig
+  console.log('All keys in advisorConfig:', Object.keys(advisorConfig));
 
   const topicsByAdvisor = useMemo(() => {
     const map = {};
