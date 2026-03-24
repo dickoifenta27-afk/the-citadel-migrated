@@ -158,18 +158,8 @@ export default function MainMenu() {
       // Ignore if entities don't exist
     }
 
-    if (factionLoyalties && factions) {
-      const parsedLoyalties = typeof factionLoyalties === 'string' ? JSON.parse(factionLoyalties) : (factionLoyalties || {});
-      for (const faction of factions) {
-        const overrideLoyalty = parsedLoyalties[faction.faction_name];
-        if (overrideLoyalty !== undefined) {
-          await base44.entities.FactionRegistry.update(faction.id, {
-            ...faction,
-            loyalty: overrideLoyalty
-          });
-        }
-      }
-    }
+    // Note: Faction loyalties are now handled per-user in user_states
+    // The faction_registry table contains base values, not user-specific
   };
 
   const handleNewGame = async () => {
