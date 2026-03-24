@@ -8,7 +8,7 @@ export default function KingdomStatus({ gameState }) {
         <div>
           <div className="flex justify-between mb-2">
             <span className="text-sm font-semibold" style={{ color: 'var(--color-text-accent)' }}>Stability</span>
-            <span className="font-bold" style={{ color: 'var(--color-gold-bright)' }}>{(gameState?.stability * 100).toFixed(1)}%</span>
+            <span className="font-bold" style={{ color: 'var(--color-gold-bright)' }}>{gameState?.stability.toFixed(1)}%</span>
           </div>
           <div className="w-full rounded-full h-3" style={{ background: 'var(--color-bg-primary)', border: '1px solid var(--color-border-default)' }}>
             <div className="h-3 rounded-full"

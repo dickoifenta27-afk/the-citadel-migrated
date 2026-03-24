@@ -205,7 +205,7 @@ export default function TurnSummary({ gameState, onProjectionsCalculated }) {
               <div className="flex justify-between items-center py-1.5 px-3 rounded" style={{ background: 'rgba(20,16,10,0.8)', border: '1px solid var(--color-border-default)' }}>
                 <span className="text-xs" style={{ color: 'var(--color-text-primary)' }}>Stability (from laws)</span>
                 <span className="text-xs font-bold" style={{ color: projections.stabilityDelta > 0 ? 'var(--color-success)' : 'var(--color-danger)' }}>
-                  {projections.stabilityDelta > 0 ? '+' : ''}{(projections.stabilityDelta * 100).toFixed(1)}%
+                  {projections.stabilityDelta > 0 ? '+' : ''}{projections.stabilityDelta.toFixed(1)}%
                 </span>
               </div>
             )}

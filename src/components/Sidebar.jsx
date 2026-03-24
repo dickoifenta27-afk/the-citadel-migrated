@@ -120,7 +120,8 @@ export default function Sidebar() {
         <button 
           onClick={async () => {
             await signOut();
-            navigate('/login');
+            // Force redirect to login
+            window.location.href = '/login';
           }}
           className="w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm"
           style={{ color: '#E74C3C', background: 'rgba(192, 57, 43, 0.1)' }}

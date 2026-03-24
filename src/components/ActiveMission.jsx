@@ -53,7 +53,7 @@ export default function ActiveMission({ gameState }) {
           <div className="flex justify-between mb-2">
             <span className="text-[#CD7F32] text-xs font-medium">STABILITY REQUIRED</span>
             <span className={`font-semibold text-xs ${stabilityProgress >= scenario.target_stability * 100 ? 'text-green-400' : 'text-red-400'}`}>
-              {stabilityProgress.toFixed(1)}% / {(scenario.target_stability * 100).toFixed(0)}%
+              {stabilityProgress.toFixed(1)}% / {scenario.target_stability.toFixed(0)}%
             </span>
           </div>
           <div className="w-full bg-[#1a1a1c] rounded-full h-2 border border-[#CD7F32]">

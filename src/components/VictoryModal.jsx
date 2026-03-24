@@ -16,7 +16,7 @@ export default function VictoryModal({ gameState, scenario }) {
             <div className="space-y-2 text-sm" style={{ color: 'var(--color-text-secondary)' }}>
               <p className="font-semibold mb-2" style={{ color: 'var(--color-text-accent)' }}>✓ {scenario?.title}</p>
               <p>• Turns Survived: {gameState?.turn_count}</p>
-              <p>• Final Stability: {(gameState?.stability * 100).toFixed(1)}%</p>
+              <p>• Final Stability: {gameState?.stability.toFixed(1)}%</p>
               <p>• Final Population: {gameState?.population.toLocaleString()}</p>
               <p>• Final Gold: {gameState?.gold.toLocaleString()}</p>
             </div>

@@ -10,8 +10,8 @@ export default function RoyalCodex() {
   const [expandedTopic, setExpandedTopic] = useState(null);
 
   const { data: advisorConfigs = [] } = useQuery({
-    queryKey: ['advisorConfig'],
-    queryFn: async () => await base44.entities.AdvisorConfig.list(),
+    queryKey: ['advisoryConfigs'],
+    queryFn: async () => await base44.entities.AdvisoryConfigs.list(),
     staleTime: Infinity
   });
 

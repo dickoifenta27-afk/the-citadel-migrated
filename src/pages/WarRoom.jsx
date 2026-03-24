@@ -8,13 +8,24 @@ export default function WarRoom() {
   const { gameState, refetch } = useOutletContext();
   const queryClient = useQueryClient();
 
-  const { data: regions = [] } = useQuery({
+  const { data: regions = [], error: regionsError } = useQuery({
     queryKey: ['regions'],
     queryFn: async () => {
-      return await base44.entities.Regions.list();
+      try {
+        const result = await base44.entities.Regions.list();
+        console.log('Regions loaded:', result?.length || 0, result);
+        return result;
+      } catch (err) {
+        console.error('Error loading regions:', err);
+        throw err;
+      }
     },
     staleTime: 30000
   });
+
+  if (regionsError) {
+    console.error('Regions query error:', regionsError);
+  }
 
   const conqueredCount = regions.filter((r) => r.status === 'Conquered').length;
   const totalBonusPopulation = regions.

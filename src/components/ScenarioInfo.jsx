@@ -129,12 +129,12 @@ export default function ScenarioInfo({ gameState, onTurnEnd, onCouncilRequest, o
               <div className="flex justify-between mb-1 text-[10px]">
                 <span style={{ color: 'var(--color-text-accent)' }}>Stability Required</span>
                 <span style={{ color: (gameState?.stability ?? 0) >= activeScenario.target_stability ? 'var(--color-success)' : 'var(--color-warning)' }}>
-                  {((gameState?.stability ?? 0) * 100).toFixed(0)}% / {(activeScenario.target_stability * 100).toFixed(0)}%
+                  {(gameState?.stability ?? 0).toFixed(0)}% / {activeScenario.target_stability.toFixed(0)}%
                 </span>
               </div>
               <div className="w-full rounded h-1.5" style={{ background: 'var(--color-bg-primary)', border: '1px solid var(--color-border-default)' }}>
                 <div className="h-full rounded" style={{
-                  width: `${Math.min(100, (gameState?.stability ?? 0) * 100)}%`,
+                  width: `${gameState?.stability ?? 0}%`,
                   background: (gameState?.stability ?? 0) >= activeScenario.target_stability ? 'var(--color-success)' : 'var(--color-warning)'
                 }} />
               </div>

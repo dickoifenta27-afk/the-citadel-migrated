@@ -406,9 +406,9 @@ export default function ResourceBar({ gameState, projections }) {
               <div className="flex items-center gap-2 cursor-help">
                 <img src={ICONS.Stability} alt="Stability" style={{ width: 56, height: 56, objectFit: 'contain', filter: 'drop-shadow(0 1px 4px rgba(0,0,0,0.9))' }} />
                 <div>
-                  <p className="text-[#ffd700] text-[15px] font-bold">{((gameState?.stability ?? 0) * 100).toFixed(0)}/100</p>
+                  <p className="text-[#ffd700] text-[15px] font-bold">{(gameState?.stability ?? 0)}/100</p>
                   <p className={`text-[11px] ${(projections?.stabilityDelta ?? 0) > 0 ? 'text-green-400' : (projections?.stabilityDelta ?? 0) < 0 ? 'text-red-400' : 'text-gray-400'}`}>
-                    {(projections?.stabilityDelta ?? 0) > 0 ? '+' : ''}{((projections?.stabilityDelta ?? 0) * 100).toFixed(1)}%/turn
+                    {(projections?.stabilityDelta ?? 0) > 0 ? '+' : ''}{(projections?.stabilityDelta ?? 0)}/turn
                   </p>
                 </div>
               </div>
@@ -421,7 +421,7 @@ export default function ResourceBar({ gameState, projections }) {
                     <div className="flex justify-between py-1 border-b border-[#cd7f32]/20">
                       <span className="text-[#cd7f32]">From Active Laws & Buildings</span>
                       <span className={`font-bold ${mergedProjections.stabilityDelta > 0 ? 'text-green-400' : 'text-red-400'}`}>
-                        {mergedProjections.stabilityDelta > 0 ? '+' : ''}{(mergedProjections.stabilityDelta * 100).toFixed(1)}%
+                        {mergedProjections.stabilityDelta > 0 ? '+' : ''}{mergedProjections.stabilityDelta}
                       </span>
                     </div>
                   ) : (
@@ -430,7 +430,7 @@ export default function ResourceBar({ gameState, projections }) {
                   <div className="flex justify-between pt-2 border-t border-[#cd7f32]/30">
                     <span className="text-[#ffd700] font-semibold">Total</span>
                     <span className={`font-bold ${(mergedProjections?.stabilityDelta ?? 0) > 0 ? 'text-green-400' : (mergedProjections?.stabilityDelta ?? 0) < 0 ? 'text-red-400' : 'text-gray-400'}`}>
-                      {(mergedProjections?.stabilityDelta ?? 0) > 0 ? '+' : ''}{((mergedProjections?.stabilityDelta ?? 0) * 100).toFixed(1)}%
+                      {(mergedProjections?.stabilityDelta ?? 0) > 0 ? '+' : ''}{(mergedProjections?.stabilityDelta ?? 0).toFixed(1)}%
                     </span>
                   </div>
                 </div>
@@ -526,9 +526,9 @@ export default function ResourceBar({ gameState, projections }) {
               <div className="flex items-center gap-2 cursor-help">
                 <img src={ICONS.Prosperity} alt="Prosperity" style={{ width: 56, height: 56, objectFit: 'contain', filter: 'drop-shadow(0 1px 4px rgba(0,0,0,0.9))' }} />
                 <div>
-                  <p className="text-[#ffd700] text-[15px] font-bold">{((gameState?.prosperity ?? 0.5) * 100).toFixed(0)}/100</p>
+                  <p className="text-[#ffd700] text-[15px] font-bold">{(gameState?.prosperity ?? 50).toFixed(0)}/100</p>
                   <p className={`text-[11px] ${(projections?.prosperityDelta ?? 0) > 0 ? 'text-green-400' : (projections?.prosperityDelta ?? 0) < 0 ? 'text-red-400' : 'text-gray-400'}`}>
-                    {(projections?.prosperityDelta ?? 0) > 0 ? '+' : ''}{((projections?.prosperityDelta ?? 0) * 100).toFixed(1)}%/turn
+                    {(projections?.prosperityDelta ?? 0) > 0 ? '+' : ''}{(projections?.prosperityDelta ?? 0).toFixed(1)}%/turn
                   </p>
                 </div>
               </div>
@@ -542,7 +542,7 @@ export default function ResourceBar({ gameState, projections }) {
                     <div className="flex justify-between py-1 border-b border-[#cd7f32]/20">
                       <span className="text-[#cd7f32]">From Active Laws</span>
                       <span className={`font-bold ${mergedProjections.prosperityDelta > 0 ? 'text-green-400' : 'text-red-400'}`}>
-                        {mergedProjections.prosperityDelta > 0 ? '+' : ''}{(mergedProjections.prosperityDelta * 100).toFixed(1)}%
+                        {mergedProjections.prosperityDelta > 0 ? '+' : ''}{mergedProjections.prosperityDelta.toFixed(1)}%
                       </span>
                     </div>
                   ) : (
@@ -559,7 +559,7 @@ export default function ResourceBar({ gameState, projections }) {
                   <div className="flex justify-between pt-2 border-t border-[#cd7f32]/30">
                     <span className="text-[#ffd700] font-semibold">Total</span>
                     <span className={`font-bold ${(mergedProjections?.prosperityDelta ?? 0) > 0 ? 'text-green-400' : (mergedProjections?.prosperityDelta ?? 0) < 0 ? 'text-red-400' : 'text-gray-400'}`}>
-                      {(mergedProjections?.prosperityDelta ?? 0) > 0 ? '+' : ''}{((mergedProjections?.prosperityDelta ?? 0) * 100).toFixed(1)}%
+                      {(mergedProjections?.prosperityDelta ?? 0) > 0 ? '+' : ''}{(mergedProjections?.prosperityDelta ?? 0).toFixed(1)}%
                     </span>
                   </div>
                 </div>
