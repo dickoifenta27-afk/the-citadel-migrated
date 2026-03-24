@@ -9,11 +9,21 @@ export default function RoyalCodex() {
   const [selectedAdvisor, setSelectedAdvisor] = useState(null);
   const [expandedTopic, setExpandedTopic] = useState(null);
 
-  const { data: advisorConfigs = [] } = useQuery({
+  const { data: advisorConfigs = [], isLoading: isLoadingAdvisors, error: advisorError } = useQuery({
     queryKey: ['advisoryConfigs'],
-    queryFn: async () => await base44.entities.AdvisoryConfigs.list(),
+    queryFn: async () => {
+      console.log('Fetching advisors...');
+      const result = await base44.entities.AdvisoryConfigs.list();
+      console.log('Advisors fetched:', result);
+      return result;
+    },
     staleTime: Infinity
   });
+
+  // Debug logging
+  console.log('advisorConfigs:', advisorConfigs);
+  console.log('advisorConfig map:', advisorConfig);
+  console.log('ADVISOR_KEYS:', ADVISOR_KEYS);
 
   const { data: guides = [] } = useQuery({
     queryKey: ['advisoryGuides'],
@@ -58,6 +68,14 @@ export default function RoyalCodex() {
         <div style={{ height: '2px', marginTop: '12px', background: 'linear-gradient(to right, rgba(201,168,76,0.5) 0%, transparent 100%)' }} />
       </div>
 
+      {/* Loading / Error State */}
+      {isLoadingAdvisors && (
+        <div className="text-center py-4" style={{ color: '#C9A84C' }}>Loading advisors...</div>
+      )}
+      {advisorError && (
+        <div className="text-center py-4" style={{ color: '#E74C3C' }}>Error loading advisors: {advisorError.message}</div>
+      )}
+
       {/* Advisor Cards Row */}
       <div className="grid grid-cols-4 gap-4 mb-8">
         {ADVISOR_KEYS.map((key) => {
@@ -77,12 +95,17 @@ export default function RoyalCodex() {
                 boxShadow: isActive ? '0 0 16px rgba(255,215,0,0.35), inset 0 0 16px rgba(255,215,0,0.1)' : 'none'
               }}
             >
-              {config?.portrait_url && (
+              {config?.portrait_url ? (
                 <img
                   src={config.portrait_url}
                   alt={config?.name}
                   loading="lazy"
                   decoding="async"
+                  onError={(e) => {
+                    console.error('Failed to load image:', config.portrait_url);
+                    e.target.style.display = 'none';
+                  }}
+                  onLoad={() => console.log('Image loaded:', config.portrait_url)}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -91,6 +114,10 @@ export default function RoyalCodex() {
                     opacity: 0.9
                   }}
                 />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.5)' }}>
+                  <span className="text-gray-500 text-sm">No Image</span>
+                </div>
               )}
               <div
                 className="absolute inset-0 flex flex-col justify-end p-4"
